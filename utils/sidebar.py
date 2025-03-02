@@ -12,11 +12,11 @@ def create_sidebar_navigation(active_page=None):
     
     # Define all navigation items with their paths and labels
     nav_items = [
-        {"path": "app.py", "label": "🏠 Home", "icon": "🏠"},
-        {"path": "pages/about_me.py", "label": "ℹ️ About Me"},
-        {"path": "pages/my_recipes.py", "label": "📊 My Recipes"},
-        {"path": "pages/chatbot.py", "label": "🤖 Chat Bot"},
-        {"path": "pages/post_meal.py", "label": "📝 Share Your Meal"}
+        {"path": "Home.py", "label": "🏠 Home", "icon": "🏠"},
+        {"path": "pages/About_Leo's_Kitchen.py", "label": "ℹ️ About Me"},
+        {"path": "pages/My_Recipe.py", "label": "📊 My Recipes"},
+        {"path": "pages/Leo_Chat_Bot.py", "label": "🤖 Chat Bot"},
+        {"path": "pages/Share_Your_Meal.py", "label": "📝 Share Your Meal"}
     ]
     
     # Display main navigation items
@@ -31,13 +31,13 @@ def create_sidebar_navigation(active_page=None):
     
     if 'authenticated' in st.session_state and st.session_state.authenticated:
         st.sidebar.subheader(f"Welcome, {st.session_state.username}")
-        st.sidebar.page_link("pages/profile.py", label="👤 My Profile")
+        st.sidebar.page_link("pages/My_Profile.py", label="👤 My Profile")
         if st.sidebar.button("Logout"):
             st.session_state.authenticated = False
             st.session_state.username = ""
             st.session_state.user_id = None
             st.rerun()
     else:
-        st.sidebar.page_link("pages/auth.py", label="👤 Login/Register")
+        st.sidebar.page_link("pages/Login.py", label="👤 Login/Register")
     
     return st.sidebar

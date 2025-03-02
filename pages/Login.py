@@ -1,4 +1,4 @@
-# pages/auth.py
+# pages/Login.py
 import streamlit as st
 import pandas as pd
 import hashlib
@@ -8,15 +8,15 @@ from datetime import datetime
 
 # Page configuration
 st.set_page_config(page_title="Login/Register - Leo's Food App", page_icon="🐱", layout="wide")
-
+st.logo(image="images/logo.png", size="large", link=None, icon_image=None)
 # --- SIDEBAR NAVIGATION ---
-st.sidebar.title("Navigation")
-st.sidebar.page_link("app.py", label="🏠 Home", icon="🏠")
-st.sidebar.page_link("pages/about_me.py", label="ℹ️ About Me")
-st.sidebar.page_link("pages/my_recipes.py", label="📊 My Recipes")
-st.sidebar.page_link("pages/chatbot.py", label="🤖 Chat Bot")
-st.sidebar.page_link("pages/post_meal.py", label="📝 Share Your Meal")
-st.sidebar.page_link("pages/auth.py", label="👤 Login/Register")
+# st.sidebar.title("Navigation")
+# st.sidebar.page_link("Home.py", label="🏠 Home", icon="🏠")
+# st.sidebar.page_link("pages/About_Leo's_Kitchen.py", label="ℹ️ About Me")
+# st.sidebar.page_link("pages/My_Recipe.py", label="📊 My Recipes")
+# st.sidebar.page_link("pages/Leo_Chat_Bot.py", label="🤖 Chat Bot")
+# st.sidebar.page_link("pages/Share_Your_Meal.py", label="📝 Share Your Meal")
+# st.sidebar.page_link("pages/Login.py", label="👤 Login/Register")
 
 # Database initialization function
 def init_db():
@@ -76,7 +76,7 @@ if st.session_state.authenticated:
     col1, col2 = st.columns([1, 3])
     
     with col1:
-        st.image("https://api.placeholder.com/200/200", use_column_width=True)
+        st.image("https://revolutionuc.com/general/cat-grow.png", use_container_width=True)
         st.button("Edit Profile", key="edit_profile")
         
     with col2:

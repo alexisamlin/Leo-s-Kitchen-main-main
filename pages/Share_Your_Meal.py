@@ -1,4 +1,4 @@
-# pages/post_meal.py
+# pages/Share_Your_Meal.py
 import streamlit as st
 import pandas as pd
 import os
@@ -7,14 +7,14 @@ import io
 
 # Page configuration
 st.set_page_config(page_title="Share Your Meal - Leo's Food App", page_icon="🐱", layout="wide")
-
+st.logo(image="images/logo.png", size="large", link=None, icon_image=None)
 # --- SIDEBAR NAVIGATION ---
-st.sidebar.title("Navigation")
-st.sidebar.page_link("app.py", label="🏠 Home", icon="🏠")
-st.sidebar.page_link("pages/about_me.py", label="ℹ️ About Me")
-st.sidebar.page_link("pages/my_recipes.py", label="📊 My Recipes")
-st.sidebar.page_link("pages/chatbot.py", label="🤖 Chat Bot")
-st.sidebar.page_link("pages/post_meal.py", label="📝 Share Your Meal")
+# st.sidebar.title("Navigation")
+# st.sidebar.page_link("Home.py", label="🏠 Home", icon="🏠")
+# st.sidebar.page_link("pages/About_Leo's_Kitchen.py", label="ℹ️ About Me")
+# st.sidebar.page_link("pages/My_Recipe.py", label="📊 My Recipes")
+# st.sidebar.page_link("pages/Leo_Chat_Bot.py", label="🤖 Chat Bot")
+# st.sidebar.page_link("pages/Share_Your_Meal.py", label="📝 Share Your Meal")
 
 # --- SHARE MEAL FORM ---
 st.title("Share Your Meal 📝")
@@ -147,7 +147,53 @@ if submitted:
     
     # Save to CSV
     meals_df.to_csv("data/meals.csv", index=False)
-    
+
+    # After saving to CSV in Share_Your_Meal.py, modify the code after the success message
+
+    # Add to session state for My_Profile.py to use
+    if 'user_meals' not in st.session_state:
+        st.session_state.user_meals = []
+
+    # Create a meal entry in the format expected by My_Profile.py
+    new_meal_entry = {
+        "id": len(st.session_state.user_meals) + 1 if 'user_meals' in st.session_state else 1,
+        "name": meal_name,
+        "date_posted": pd.Timestamp.now().strftime("%b %d, %Y"),
+        "likes": 0,
+        "comments": 0,
+        "image": image_path if image_path else "https://api.placeholder.com/300/200"
+    }
+
+    # Add to session state
+    st.session_state.user_meals.append(new_meal_entry)
+
+    # Remove the auto-redirect that's causing the logout
+    # Delete or comment out these lines:
+    # st.markdown("""
+    # <meta http-equiv="refresh" content="3;URL='/'">
+    # """, unsafe_allow_html=True)
+
+    # Replace with a direct button
+    if st.button("Go to My Profile"):
+        st.switch_page("pages/My_Profile.py")
+
+    # After saving to CSV in Share_Your_Meal.py, add this code:
+    if 'user_meals' not in st.session_state:
+        st.session_state.user_meals = []
+
+    # Create a meal entry in the format expected by My_Profile.py
+    new_meal_entry = {
+        "id": len(st.session_state.user_meals) + 1,
+        "name": meal_name,
+        "date_posted": pd.Timestamp.now().strftime("%b %d, %Y"),
+        "likes": 0,
+        "comments": 0,
+        "image": image_path if image_path else "https://api.placeholder.com/300/200"
+    }
+
+    # Add to session state
+    st.session_state.user_meals.append(new_meal_entry)
+
     # Success message
     st.success("Your meal has been shared successfully!")
     
@@ -179,4 +225,4 @@ if submitted:
     """, unsafe_allow_html=True)
     
     if st.button("Go to Home Page Now"):
-        st.switch_page("app.py")
+        st.switch_page("Home.py")

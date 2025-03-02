@@ -7,9 +7,9 @@ from utils.sidebar import create_sidebar_navigation
 
 # Page configuration
 st.set_page_config(page_title="Recipe Details - Leo's Food App", page_icon="🐱", layout="wide")
-
+st.logo(image="images/logo.png", size="large", link=None, icon_image=None)
 # Create sidebar navigation
-sidebar = create_sidebar_navigation("pages/recipe_detail.py")
+# sidebar = create_sidebar_navigation("pages/recipe_detail.py")
 
 # Get recipe ID from query parameters (would be implemented in a real app)
 # For demo purposes, let's create a sample recipe
@@ -17,9 +17,9 @@ recipe = {
     "id": 1,
     "name": "Protein-Packed Overnight Oats",
     "user": "@HealthyChef",
-    "user_profile_pic": "https://api.placeholder.com/100/100",
+    "user_profile_pic": "https://revolutionuc.com/general/cat-learn.png/100/100",
     "date_posted": "February 28, 2025",
-    "image": "https://api.placeholder.com/800/600",
+    "image": "https://i.pinimg.com/originals/4f/35/92/4f3592c94e4091647a5d6372602a7d05.jpg",
     "category": "Breakfast",
     "description": "A delicious high-protein breakfast that you can prepare the night before. Perfect for busy mornings when you need a nutritious start to your day without spending time cooking.",
     "rating": 4.8,
@@ -69,7 +69,7 @@ recipe = {
 col_img, col_info = st.columns([3, 2], gap="large")
 
 with col_img:
-    st.image(recipe["image"], use_column_width=True)
+    st.image(recipe["image"], use_container_width=True)
     
     # Action buttons
     btn_col1, btn_col2, btn_col3, btn_col4 = st.columns(4)
@@ -172,6 +172,6 @@ similar_cols = st.columns(3)
 
 for i, similar in enumerate(recipe["similar_recipes"]):
     with similar_cols[i]:
-        st.image(similar["image"], use_column_width=True)
+        st.image(similar["image"], use_container_width=True)
         st.markdown(f"**{similar['name']}**")
         st.button("View Recipe", key=f"similar_{i}")
