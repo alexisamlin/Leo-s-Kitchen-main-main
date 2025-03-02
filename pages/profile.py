@@ -1,4 +1,3 @@
-# pages/profile.py
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -39,9 +38,14 @@ def delete_meal(meal_id):
     ]
     return True
 
-# Check authentication status
+# Initialize user session state variables if not already set
 if 'authenticated' not in st.session_state:
     st.session_state.authenticated = True  # For testing purposes
+
+# Add required user information for post_meal.py
+if st.session_state.authenticated and 'user_id' not in st.session_state:
+    st.session_state.user_id = "test_user_123"  # Mock user ID
+    st.session_state.username = "fitness_user"  # Set username
 
 if not st.session_state.authenticated:
     st.warning("Please log in to view your profile")
@@ -158,7 +162,9 @@ else:
                         
                 st.divider()
         
-        st.button("Create New Recipe", on_click=lambda: st.switch_page("pages/post_meal.py"))
+        # Button to create new recipe with proper navigation
+        if st.button("Create New Recipe"):
+            st.switch_page("pages/post_meal.py")
     
     with tab3:
         # Keep existing saved recipes code...
